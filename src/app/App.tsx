@@ -9,15 +9,15 @@ import {
 // ─── Data ──────────────────────────────────────────────────────────────────
 
 const comics = [
-  { id: 1, title: "War-God: Son of Vayu", tagline: "War for Justice", genre: "Mythic Warriors", price: 1449, badge: "HOT", accentColor: "#C8181E", img: "1574375927818-43e50b87e3c4", issues: 3 },
-  { id: 2, title: "Jackboy: State Rebel", tagline: "He is really crazy! And he's winning!", genre: "Action-Adventure", price: 1369, badge: "NEW", accentColor: "#1A4FCC", img: "1535090264-6cfaa3e02ade", issues: 2 },
-  { id: 3, title: "Gilded Jaguar", tagline: "A forest road life of a jaguar face man", genre: "Action-Adventure", price: 1367, badge: null, accentColor: "#2D7A3A", img: "1508213838-bdef6a3dc4fe", issues: 1 },
-  { id: 4, title: "Starveilers: War of the Pearl", tagline: "Team ensemble — April Issue", genre: "Team-Up Sagas", price: 1489, badge: "NEW", accentColor: "#6B2DB5", img: "1511367461989-f85a21fda167", issues: 1 },
-  { id: 5, title: "The Second Bhaime", tagline: "War between mens but not man", genre: "Mythic Warriors", price: 1329, badge: null, accentColor: "#8B4A18", img: "1531746020798-e6953c6e8e04", issues: 1 },
-  { id: 6, title: "Cowgirl: Justice Rides", tagline: "Hero, villain, or somewhere between?", genre: "Action-Adventure", price: 1249, badge: "BUY & WIN", accentColor: "#B55A0D", img: "1536440136628-849c177e76a1", issues: 2 },
-  { id: 7, title: "Surya", tagline: "Not the Original", genre: "Urban Heroes", price: 1499, badge: "HOT", accentColor: "#1A4FCC", img: "1580477667995-2b94f01c9516", issues: 2 },
-  { id: 8, title: "Major Mukund", tagline: "Way of Independent", genre: "Urban Heroes", price: 1389, badge: null, accentColor: "#2D6B4F", img: "1507003211169-0a1dd7228f2d", issues: 4 },
-  { id: 9, title: "Bineman", tagline: "Silver Heart Creature", genre: "Urban Heroes", price: 1379, badge: "NEW", accentColor: "#1A6B7A", img: "1568702846914-96b305d2aaeb", issues: 1 },
+  { id: 1, title: "War-God: Son of Vayu", tagline: "War for Justice", genre: "Mythic Warriors", price: 1449, badge: "HOT", accentColor: "#C8181E", img: "/images/comic-1.jpeg", issues: 3 },
+  { id: 2, title: "Jackboy: State Rebel", tagline: "He is really crazy! And he's winning!", genre: "Action-Adventure", price: 1369, badge: "NEW", accentColor: "#1A4FCC", img: "/images/comic-2.jpeg", issues: 2 },
+  { id: 3, title: "Gilded Jaguar", tagline: "A forest road life of a jaguar face man", genre: "Action-Adventure", price: 1367, badge: null, accentColor: "#2D7A3A", img: "/images/comic-3.jpeg", issues: 1 },
+  { id: 4, title: "Starveilers: War of the Pearl", tagline: "Team ensemble — April Issue", genre: "Team-Up Sagas", price: 1489, badge: "NEW", accentColor: "#6B2DB5", img: "/images/comic-4.jpeg", issues: 1 },
+  { id: 5, title: "The Second Bhaime", tagline: "War between mens but not man", genre: "Mythic Warriors", price: 1329, badge: null, accentColor: "#8B4A18", img: "/images/comic-5.jpeg", issues: 1 },
+  { id: 6, title: "Cowgirl: Justice Rides", tagline: "Hero, villain, or somewhere between?", genre: "Action-Adventure", price: 1249, badge: "BUY & WIN", accentColor: "#B55A0D", img: "/images/comic-6.jpeg", issues: 2 },
+  { id: 7, title: "Surya", tagline: "Not the Original", genre: "Urban Heroes", price: 1499, badge: "HOT", accentColor: "#1A4FCC", img: "/images/comic-7.jpeg", issues: 2 },
+  { id: 8, title: "Major Mukund", tagline: "Way of Independent", genre: "Urban Heroes", price: 1389, badge: null, accentColor: "#2D6B4F", img: "/images/comic-8.jpeg", issues: 4 },
+  { id: 9, title: "Bineman", tagline: "Silver Heart Creature", genre: "Urban Heroes", price: 1379, badge: "NEW", accentColor: "#1A6B7A", img: "/images/comic-9.jpeg", issues: 1 },
 ];
 
 const heroSlides = [comics[0], comics[3], comics[6]];
@@ -107,7 +107,7 @@ function ComicCard({ comic, onClick }: { comic: typeof comics[0]; onClick?: () =
       >
         <div className="relative" style={{ aspectRatio: "2/3", background: comic.accentColor }}>
           <img
-            src={`https://images.unsplash.com/photo-${comic.img}?w=300&h=450&fit=crop&auto=format`}
+            src={comic.img}
             alt={comic.title}
             className="w-full h-full object-cover mix-blend-overlay opacity-70"
           />
@@ -187,9 +187,6 @@ function NavBar({ currentPage, setPage }: { currentPage: string; setPage: (p: st
             <button onClick={() => setPage("login")} className="hidden sm:flex items-center gap-1 bg-[#C8181E] border-2 border-[#C8181E] hover:bg-white hover:text-[#C8181E] text-white px-3 py-1 text-sm font-bold transition-colors" style={{ fontFamily: "Bangers, cursive", fontSize: "15px", letterSpacing: "0.04em" }}>
               <User size={14} /> LOGIN
             </button>
-            <button onClick={() => setPage("admin")} className="hidden sm:flex items-center gap-1 border-2 border-[#F5C518] text-[#F5C518] hover:bg-[#F5C518] hover:text-black px-3 py-1 text-sm font-bold transition-colors" style={{ fontFamily: "Bangers, cursive", fontSize: "15px", letterSpacing: "0.04em" }}>
-              ADMIN
-            </button>
             <button className="md:hidden p-2 text-white" onClick={() => setMobileOpen(!mobileOpen)}>
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -208,7 +205,6 @@ function NavBar({ currentPage, setPage }: { currentPage: string; setPage: (p: st
           ))}
           <div className="flex gap-2 pt-2">
             <button onClick={() => { setPage("login"); setMobileOpen(false); }} className="flex-1 bg-[#C8181E] text-white py-2 text-center font-bold" style={{ fontFamily: "Bangers, cursive", fontSize: "16px" }}>LOGIN</button>
-            <button onClick={() => { setPage("admin"); setMobileOpen(false); }} className="flex-1 border-2 border-[#F5C518] text-[#F5C518] py-2 text-center font-bold" style={{ fontFamily: "Bangers, cursive", fontSize: "16px" }}>ADMIN</button>
           </div>
         </div>
       )}
@@ -245,7 +241,7 @@ function HeroSection({ setPage }: { setPage: (p: string) => void }) {
       {/* Background art */}
       <div className="absolute inset-0 transition-opacity duration-500" style={{ opacity: animating ? 0 : 1 }}>
         <img
-          src={`https://images.unsplash.com/photo-${comic.img}?w=1400&h=900&fit=crop&auto=format`}
+          src={comic.img}
           alt={comic.title}
           className="w-full h-full object-cover"
           style={{ opacity: 0.25, mixBlendMode: "luminosity" }}
@@ -304,7 +300,7 @@ function HeroSection({ setPage }: { setPage: (p: string) => void }) {
               >
                 <div className="relative w-full h-full" style={{ background: comic.accentColor }}>
                   <img
-                    src={`https://images.unsplash.com/photo-${comic.img}?w=400&h=600&fit=crop&auto=format`}
+                    src={comic.img}
                     alt={comic.title}
                     className="w-full h-full object-cover"
                   />
@@ -395,6 +391,46 @@ function ComicRow({ title, badge, comics: rowComics, setPage }: { title: string;
   );
 }
 
+// ─── Gallery ───────────────────────────────────────────────────────────────
+
+function GallerySection() {
+  const galleryImages = [
+    "/images/comic-10.jpeg", "/images/comic-11.jpeg", "/images/comic-12.jpeg", 
+    "/images/comic-13.jpeg", "/images/comic-14.jpeg", "/images/comic-15.jpeg", 
+    "/images/comic-16.jpeg", "/images/comic-17.jpeg", "/images/comic-18.jpeg", "/images/comic-19.jpeg"
+  ];
+  
+  return (
+    <div className="bg-[#0D0D0D] py-16 relative border-y-8 border-black">
+      <HalftoneOverlay opacity={0.15} />
+      <div className="max-w-7xl mx-auto px-4 relative">
+        <div className="flex items-center gap-3 mb-10">
+          <SpeechBubbleBadge text="ARTWORK" />
+          <h2 className="text-white" style={{ fontFamily: "Bangers, cursive", fontSize: "clamp(32px, 5vw, 48px)", letterSpacing: "0.05em", textShadow: "4px 4px 0 #C8181E" }}>
+            THE LEKHYAS UNIVERSE GALLERY
+          </h2>
+        </div>
+        
+        {/* Marvel-style dynamic bento grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+          {galleryImages.map((img, i) => (
+            <div key={i} className={`relative group overflow-hidden border-4 border-black bg-black ${i % 5 === 0 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'}`} style={{ boxShadow: "4px 4px 0 #000" }}>
+              <img src={img} alt={`Gallery artwork ${i + 1}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-70 group-hover:opacity-100" />
+              <div className="absolute inset-0" style={{ background: `linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 40%)` }} />
+              <div className="absolute inset-0 border-4 border-transparent group-hover:border-[#F5C518] transition-colors pointer-events-none z-10" />
+              <div className="absolute bottom-3 left-3 opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                <div className="w-8 h-8 rounded-full bg-[#C8181E] border-2 border-[#F5C518] flex items-center justify-center">
+                  <span style={{ fontFamily: "Bangers, cursive", fontSize: "13px", color: "#FFF" }}>Ls</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ─── Homepage ──────────────────────────────────────────────────────────────
 
 function HomePage({ setPage }: { setPage: (p: string) => void }) {
@@ -429,6 +465,9 @@ function HomePage({ setPage }: { setPage: (p: string) => void }) {
           </div>
         </div>
       ))}
+
+      {/* Gallery Section */}
+      <GallerySection />
 
       {/* Subscription Banner */}
       <div className="relative overflow-hidden" style={{ background: "#C8181E" }}>
@@ -527,7 +566,7 @@ function ComicDetailPage({ setPage }: { setPage: (p: string) => void }) {
           <div className="lg:col-span-2">
             <div className="relative border-4 border-black overflow-hidden" style={{ boxShadow: "10px 10px 0 #0D0D0D", maxWidth: 380 }}>
               <div className="relative" style={{ aspectRatio: "2/3", background: comic.accentColor }}>
-                <img src={`https://images.unsplash.com/photo-${comic.img}?w=500&h=750&fit=crop&auto=format`} alt={comic.title} className="w-full h-full object-cover" />
+                <img src={comic.img} alt={comic.title} className="w-full h-full object-cover" />
                 <HalftoneOverlay opacity={0.06} />
                 <div className="absolute inset-0" style={{ background: `linear-gradient(180deg, transparent 50%, ${comic.accentColor}CC 100%)` }} />
                 <div className="absolute top-3 left-3 flex items-center gap-2">
@@ -549,7 +588,7 @@ function ComicDetailPage({ setPage }: { setPage: (p: string) => void }) {
               <div className="flex gap-2">
                 {[1, 2, 3].map(n => (
                   <div key={n} className="w-16 h-24 border-2 border-black overflow-hidden bg-[#888] relative cursor-pointer hover:opacity-80">
-                    <img src={`https://images.unsplash.com/photo-${comic.img}?w=80&h=120&fit=crop&auto=format&crop=entropy&_seed=${n}`} alt={`Page ${n}`} className="w-full h-full object-cover" />
+                    <img src={comic.img} alt={`Page ${n}`} className="w-full h-full object-cover" />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/40">
                       <span className="text-white text-xs font-bold">{n}</span>
                     </div>
@@ -647,7 +686,7 @@ function ReaderPage({ setPage }: { setPage: (p: string) => void }) {
   const [page, setPageNum] = useState(1);
   const [barVisible, setBarVisible] = useState(true);
   const total = 12;
-  const imgIds = ["1574375927818-43e50b87e3c4", "1535090264-6cfaa3e02ade", "1508213838-bdef6a3dc4fe"];
+  const imgIds = ["/images/comic-10.jpeg", "/images/comic-11.jpeg", "/images/comic-12.jpeg", "/images/comic-13.jpeg", "/images/comic-14.jpeg", "/images/comic-15.jpeg"];
 
   return (
     <div className="fixed inset-0 bg-[#0A0A0A] z-50 flex flex-col" style={{ fontFamily: "DM Sans, sans-serif" }}>
@@ -676,7 +715,7 @@ function ReaderPage({ setPage }: { setPage: (p: string) => void }) {
         <div className="relative" style={{ maxHeight: "calc(100vh - 130px)", aspectRatio: "2/3", position: "relative" }}>
           <div className="w-full h-full border-4 border-[#222] overflow-hidden" style={{ maxHeight: "calc(100vh - 130px)", maxWidth: "calc((100vh - 130px) * 2/3)" }}>
             <img
-              src={`https://images.unsplash.com/photo-${imgIds[(page - 1) % imgIds.length]}?w=600&h=900&fit=crop&auto=format`}
+              src={imgIds[(page - 1) % imgIds.length]}
               alt={`Page ${page}`}
               className="w-full h-full object-cover select-none"
               draggable={false}
@@ -725,7 +764,7 @@ function ReaderPage({ setPage }: { setPage: (p: string) => void }) {
           {Array.from({ length: total }).map((_, i) => (
             <button key={i} onClick={() => setPageNum(i + 1)}
               className={`flex-shrink-0 w-8 h-10 border transition-colors overflow-hidden ${page === i + 1 ? "border-[#C8181E]" : "border-[#333] hover:border-[#666]"}`}>
-              <img src={`https://images.unsplash.com/photo-${imgIds[i % imgIds.length]}?w=32&h=40&fit=crop&auto=format`} alt={`${i + 1}`} className="w-full h-full object-cover" />
+              <img src={imgIds[i % imgIds.length]} alt={`${i + 1}`} className="w-full h-full object-cover" />
             </button>
           ))}
         </div>
