@@ -34,6 +34,9 @@ connectDB();
 
 const app = express();
 
+// ─── Trust Proxy (Required for Vercel & express-rate-limit) ──────────────────
+app.set('trust proxy', 1);
+
 // ─── Security Headers (Helmet) ────────────────────────────────────────────────
 app.use(helmet({
   contentSecurityPolicy: {
