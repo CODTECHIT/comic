@@ -80,7 +80,7 @@ export function HomePage() {
 
   return (
     <div>
-      <HeroSection setPage={setPage} setSelectedComic={setSelectedComic} />
+      <HeroSection />
 
       {grouped.length > 0 ? grouped.map((cat) => (
         <div key={cat.name} className="relative bg-[#F4EFE0]">

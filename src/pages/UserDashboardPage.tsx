@@ -22,7 +22,7 @@ export function UserDashboardPage() {
     setLoading(true);
     setError(null);
     fetchApi(`${API_URL}/users/profile`, {
-      headers: { "Authorization": `Bearer ${profile.token}` }
+      headers: { "Authorization": `Bearer ${profile?.token}` }
     })
       .then(res => res.json())
       .then(data => {
