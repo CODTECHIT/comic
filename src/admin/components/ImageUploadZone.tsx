@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
-import { UploadCloud, X } from "lucide-react";
+import { UploadCloud, X, Loader2 } from "lucide-react";
+import { API_URL } from "../../config/api";
 
 interface ImageUploadZoneProps {
   label: string;
@@ -14,14 +15,22 @@ export function ImageUploadZone({ label, description, multiple = false, value, o
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
 
-  // Mock Cloudinary upload function
+  // Real Cloudinary upload function via backend API
   const uploadToCloudinary = async (file: File): Promise<string> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // Mock returning a watermarked URL
-        resolve(URL.createObjectURL(file));
-      }, 1500);
+    const formData = new FormData();
+    formData.append("file", file);
+    
+    const response = await fetch(`${API_URL}/upload`, {
+      method: "POST",
+      body: formData,
     });
+    
+    if (!response.ok) {
+      throw new Error("Upload failed");
+    }
+    
+    const data = await response.json();
+    return data.url;
   };
 
   const handleFiles = async (files: FileList | null) => {
@@ -37,6 +46,9 @@ export function ImageUploadZone({ label, description, multiple = false, value, o
         const url = await uploadToCloudinary(files[0]);
         onChange(url);
       }
+    } catch (error) {
+      console.error("Error uploading to Cloudinary:", error);
+      alert("Failed to upload image. Please try again.");
     } finally {
       setIsUploading(false);
     }

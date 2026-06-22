@@ -1,0 +1,29 @@
+[INFO] 2026-06-22T17:37:18.862Z - MongoDB Connected: ac-zaf2bzb-shard-00-02.chbvmvp.mongodb.net
+[INFO] 2026-06-22T17:49:19.210Z - MongoDB Connected: ac-zaf2bzb-shard-00-02.chbvmvp.mongodb.net
+[INFO] 2026-06-22T17:49:27.680Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T17:49:50.002Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T17:49:53.435Z - Seeded default plan: 1 Month Membership
+[INFO] 2026-06-22T17:49:53.889Z - Seeded default plan: 3 Months Membership
+[INFO] 2026-06-22T17:49:54.343Z - Seeded default plan: 6 Months Membership
+[INFO] 2026-06-22T17:49:54.798Z - Seeded default plan: 1 Year Membership
+[INFO] 2026-06-22T17:50:00.811Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T17:50:09.178Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T17:57:47.042Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T17:57:57.269Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:11:25.916Z - MongoDB Connected: ac-zaf2bzb-shard-00-00.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:15:30.600Z - MongoDB Connected: ac-zaf2bzb-shard-00-00.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:15:44.085Z - MongoDB Connected: ac-zaf2bzb-shard-00-00.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:25:38.678Z - MongoDB Connected: ac-zaf2bzb-shard-00-00.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:34:12.070Z - MongoDB Connected: ac-zaf2bzb-shard-00-00.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:38:58.666Z - MongoDB Connected: ac-zaf2bzb-shard-00-00.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:39:11.157Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:39:21.174Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:39:30.602Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:43:45.126Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:45:24.558Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T18:46:05.317Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T19:03:02.511Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T19:05:05.029Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T19:11:36.961Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T19:21:05.979Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net
+[INFO] 2026-06-22T19:22:26.506Z - MongoDB Connected: ac-zaf2bzb-shard-00-01.chbvmvp.mongodb.net

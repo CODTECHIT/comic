@@ -1,12 +1,38 @@
+import { useState } from "react";
 import { useNavigate } from "react-router";
+import { Lock } from "lucide-react";
+import { API_URL } from "../../config/api";
 
-export function AdminLogin() {
+export function AdminLogin({ setAdminAuth }: any) {
   const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const [error, setError] = useState("");
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Real auth would happen here
-    navigate("/admin/dashboard");
+    const formData = new FormData(e.target as HTMLFormElement);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    try {
+      const response = await fetch(`${API_URL}/admin/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        if (data.token) {
+          localStorage.setItem("adminToken", data.token);
+        }
+        navigate("/admin/comic/dashboard");
+      } else {
+        const data = await response.json();
+        setError(data.message || "Login failed");
+      }
+    } catch (err) {
+      setError("Server error. Please try again.");
+    }
   };
 
   return (
@@ -26,6 +52,11 @@ export function AdminLogin() {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-slate-200">
           <form className="space-y-6" onSubmit={handleLogin}>
+            {error && (
+              <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-2 rounded text-sm">
+                {error}
+              </div>
+            )}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-slate-700">
                 Email address
@@ -37,7 +68,6 @@ export function AdminLogin() {
                   type="email"
                   autoComplete="email"
                   required
-                  defaultValue="admin@lekhyasstudio.com"
                   className="block w-full appearance-none rounded-md border border-slate-300 px-3 py-2 placeholder-slate-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
                 />
               </div>
@@ -54,7 +84,6 @@ export function AdminLogin() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  defaultValue="password"
                   className="block w-full appearance-none rounded-md border border-slate-300 px-3 py-2 placeholder-slate-400 shadow-sm focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm"
                 />
               </div>

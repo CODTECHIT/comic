@@ -5,6 +5,11 @@ import { AdminLogin } from "./admin/pages/AdminLogin";
 import { AdminDashboard } from "./admin/pages/AdminDashboard";
 import { ManageComics } from "./admin/pages/ManageComics";
 import { AddEditComic } from "./admin/pages/AddEditComic";
+import { ManageCategories } from "./admin/pages/ManageCategories";
+import { ManageSubscriptions } from "./admin/pages/ManageSubscriptions";
+import { ManageOrders } from "./admin/pages/ManageOrders";
+import { ManageHomepage } from "./admin/pages/ManageHomepage";
+import { ManageComments } from "./admin/pages/ManageComments";
 
 export function AppRoutes() {
   return (
@@ -14,19 +19,18 @@ export function AppRoutes() {
         <Route path="/*" element={<PublicApp />} />
 
         {/* Admin Site */}
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<Navigate to="/admin/dashboard" replace />} />
+        <Route path="/admin/comic/login" element={<AdminLogin />} />
+        <Route path="/admin/comic" element={<AdminLayout />}>
+          <Route index element={<Navigate to="/admin/comic/dashboard" replace />} />
           <Route path="dashboard" element={<AdminDashboard />} />
           <Route path="comics" element={<ManageComics />} />
           <Route path="comics/new" element={<AddEditComic />} />
           <Route path="comics/:id/edit" element={<AddEditComic />} />
-          {/* Placeholders for other routes */}
-          <Route path="categories" element={<div className="p-8">Manage Categories Placeholder</div>} />
-          <Route path="subscriptions" element={<div className="p-8">Manage Subscriptions Placeholder</div>} />
-          <Route path="orders" element={<div className="p-8">Orders & Sales Placeholder</div>} />
-          <Route path="homepage" element={<div className="p-8">Homepage Manager Placeholder</div>} />
-          <Route path="settings" element={<div className="p-8">Site Settings Placeholder</div>} />
+          <Route path="categories" element={<ManageCategories />} />
+          <Route path="subscriptions" element={<ManageSubscriptions />} />
+          <Route path="orders" element={<ManageOrders />} />
+          <Route path="comments" element={<ManageComments />} />
+          <Route path="homepage" element={<ManageHomepage />} />
         </Route>
       </Routes>
     </BrowserRouter>

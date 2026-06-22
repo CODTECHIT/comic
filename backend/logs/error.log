@@ -1,0 +1,20 @@
+[ERROR] 2026-06-22T18:44:38.560Z - 404 - Not Found - /api/v1/emails/test - /api/v1/emails/test - GET - ::1 Error: Not Found - /api/v1/emails/test
+    at notFound (file:///C:/Users/MAHAJAN%20ASHOK/OneDrive/Desktop/comic%20book/comic-1/backend/src/middleware/errorMiddleware.js:4:17)
+    at Layer.handle [as handle_request] (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:286:9
+    at router.process_params (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:280:10)
+    at file:///C:/Users/MAHAJAN%20ASHOK/OneDrive/Desktop/comic%20book/comic-1/backend/node_modules/express-rate-limit/dist/index.mjs:779:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async file:///C:/Users/MAHAJAN%20ASHOK/OneDrive/Desktop/comic%20book/comic-1/backend/node_modules/express-rate-limit/dist/index.mjs:663:5
+[ERROR] 2026-06-22T18:44:39.465Z - 404 - Not Found - /favicon.ico - /favicon.ico - GET - ::1 Error: Not Found - /favicon.ico
+    at notFound (file:///C:/Users/MAHAJAN%20ASHOK/OneDrive/Desktop/comic%20book/comic-1/backend/src/middleware/errorMiddleware.js:4:17)
+    at Layer.handle [as handle_request] (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:286:9
+    at router.process_params (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:280:10)
+    at file:///C:/Users/MAHAJAN%20ASHOK/OneDrive/Desktop/comic%20book/comic-1/backend/node_modules/express-rate-limit/dist/index.mjs:779:7
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async file:///C:/Users/MAHAJAN%20ASHOK/OneDrive/Desktop/comic%20book/comic-1/backend/node_modules/express-rate-limit/dist/index.mjs:663:5

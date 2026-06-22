@@ -1,23 +1,83 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Plus, Search, MoreVertical, Edit, Trash } from "lucide-react";
 import { Link, useNavigate } from "react-router";
-
-// Mock data
-const comicsData = [
-  { id: 1, title: "War-God: Son of Vayu", category: "Mythic Warriors", price: 1449, status: "Published", date: "Mar 10, 2026", img: "/images/comic-1.jpeg" },
-  { id: 2, title: "Jackboy: State Rebel", category: "Action-Adventure", price: 1369, status: "Draft", date: "Apr 02, 2026", img: "/images/comic-2.jpeg" },
-];
+import { API_URL } from "../../config/api";
+import { fetchApi } from "../../lib/apiClient";
 
 export function ManageComics() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
+  const [comicsData, setComicsData] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchComics = async () => {
+      try {
+        const response = await fetchApi(`${API_URL}/comics`);
+        if (response.ok) {
+          const data = await response.json();
+          // Transform backend data to match table format
+          const formatted = data.map((c: any) => ({
+            id: c._id,
+            title: c.title,
+            category: c.category,
+            price: c.price,
+            status: c.status === "published" ? "Published" : "Draft",
+            date: new Date(c.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+            img: c.coverImage || "/images/comic-1.jpeg" // Fallback if no cover
+          }));
+          setComicsData(formatted);
+        }
+      } catch (err) {
+        console.error("Failed to fetch comics", err);
+      }
+    };
+    
+    const fetchCategories = async () => {
+      try {
+        const response = await fetchApi(`${API_URL}/categories`);
+        if (response.ok) {
+          const data = await response.json();
+          setCategories(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch categories", err);
+      }
+    };
+
+    fetchComics();
+    fetchCategories();
+  }, []);
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm("Are you sure you want to delete this comic?")) return;
+    
+    try {
+      const response = await fetchApi(`${API_URL}/comics/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${localStorage.getItem("adminToken")}`
+        }
+      });
+      
+      if (response.ok) {
+        setComicsData(prev => prev.filter(comic => comic.id !== id));
+      } else {
+        const errData = await response.json().catch(() => ({}));
+        alert(`Failed to delete comic: ${errData.message || "Unknown error"}`);
+      }
+    } catch (err) {
+      console.error("Failed to delete comic", err);
+      alert("Error deleting comic");
+    }
+  };
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-slate-900">Manage Comics</h1>
         <button 
-          onClick={() => navigate("/admin/comics/new")}
+          onClick={() => navigate("/admin/comic/comics/new")}
           className="bg-[#C8181E] hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium text-sm flex items-center gap-2 transition-colors"
         >
           <Plus size={16} /> Add Comic
@@ -39,8 +99,9 @@ export function ManageComics() {
           </div>
           <select className="border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
             <option value="">All Categories</option>
-            <option value="mythic">Mythic Warriors</option>
-            <option value="urban">Urban Heroes</option>
+            {categories.map(c => (
+              <option key={c._id} value={c.name}>{c.name}</option>
+            ))}
           </select>
           <select className="border border-slate-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-red-500">
             <option value="">All Statuses</option>
@@ -81,10 +142,10 @@ export function ManageComics() {
                   <td className="px-6 py-4 text-sm text-slate-500">{comic.date}</td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex justify-end gap-2">
-                      <button className="p-1.5 text-slate-400 hover:text-blue-600 rounded transition-colors" title="Edit">
+                      <button onClick={() => navigate(`/admin/comic/comics/${comic.id}/edit`)} className="p-1.5 text-slate-400 hover:text-blue-600 rounded transition-colors" title="Edit">
                         <Edit size={16} />
                       </button>
-                      <button className="p-1.5 text-slate-400 hover:text-red-600 rounded transition-colors" title="Delete">
+                      <button onClick={() => handleDelete(comic.id)} className="p-1.5 text-slate-400 hover:text-red-600 rounded transition-colors" title="Delete">
                         <Trash size={16} />
                       </button>
                     </div>
