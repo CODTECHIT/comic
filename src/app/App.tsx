@@ -12,7 +12,6 @@ import { HomePage } from "../pages/HomePage";
 import { BrowsePage } from "../pages/BrowsePage";
 import { ComicDetailPage } from "../pages/ComicDetailPage";
 import { ReaderPage } from "../pages/ReaderPage";
-import { SearchResultsPage } from "../pages/SearchResultsPage";
 import { TermsPage } from "../pages/TermsPage";
 import { PrivacyPage } from "../pages/PrivacyPage";
 import { UserDashboardPage } from "../pages/UserDashboardPage";
