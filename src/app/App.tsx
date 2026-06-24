@@ -12,6 +12,9 @@ import { HomePage } from "../pages/HomePage";
 import { BrowsePage } from "../pages/BrowsePage";
 import { ComicDetailPage } from "../pages/ComicDetailPage";
 import { ReaderPage } from "../pages/ReaderPage";
+import { SearchResultsPage } from "../pages/SearchResultsPage";
+import { TermsPage } from "../pages/TermsPage";
+import { PrivacyPage } from "../pages/PrivacyPage";
 import { UserDashboardPage } from "../pages/UserDashboardPage";
 import { PlansPage } from "../pages/PlansPage";
 import { CheckoutPage } from "../pages/CheckoutPage";
@@ -81,8 +84,8 @@ function AppContent() {
           <Route path="/plans" element={<PlansPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/terms" element={<SimplePage title="Terms & Conditions" />} />
-          <Route path="/privacy" element={<SimplePage title="Privacy Policy" />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/contact" element={<SimplePage title="Contact Us" />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
