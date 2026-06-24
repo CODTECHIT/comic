@@ -145,9 +145,13 @@ export const categorySchema = z.object({
 
 export const heroSlideSchema = z.object({
   body: z.object({
-    title: z.string().max(200).optional(),
-    imageUrl: z.string().url("Invalid image URL"),
-    link: z.string().url("Invalid link URL").optional(),
+    title: z.string().min(1, "Title is required").max(200),
+    tagline: z.string().min(1, "Tagline is required").max(200),
+    genre: z.string().min(1, "Genre is required").max(100),
+    price: z.number().min(0, "Price cannot be negative"),
+    badge: z.string().optional(),
+    accentColor: z.string().optional(),
+    img: z.string().url("Invalid image URL"),
   }),
 });
 
