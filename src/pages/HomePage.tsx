@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAppContext } from "../context/AppContext";
 import { useSEO } from "../lib/useSEO";
@@ -9,6 +9,8 @@ import { ComicRow } from "../components/comic/ComicRow";
 import { HeroSection } from "../components/layout/HeroSection";
 import { Footer } from "../components/layout/Footer";
 import { Crown } from "lucide-react";
+import { API_URL } from "../config/api";
+import { fetchApi } from "../lib/apiClient";
 
 function GallerySection() {
   const galleryImages = [
@@ -54,6 +56,21 @@ export function HomePage() {
   const lowestPrice = activePlans.length > 0 ? Math.min(...activePlans.map(p => p.price)) : null;
   const navigate = useNavigate();
 
+  const [adBanner, setAdBanner] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchAdBanner = async () => {
+      try {
+        const res = await fetchApi(`${API_URL}/adbanner`);
+        const data = await res.json();
+        if (data && data.isActive) setAdBanner(data);
+      } catch (err) {
+        console.error("Failed to fetch ad banner", err);
+      }
+    };
+    fetchAdBanner();
+  }, []);
+
   const grouped = categories
     .map(cat => ({ ...cat, items: comics.filter((c: any) => c.genre === cat.name) }))
     .filter(cat => cat.items.length > 0);
@@ -91,6 +108,25 @@ export function HomePage() {
         <div className="py-20 text-center bg-[#F4EFE0]">
           <h2 style={{ fontFamily: "Bangers, cursive", fontSize: "36px", letterSpacing: "0.05em" }} className="mb-4">NO BOOKS AVAILABLE YET</h2>
           <p className="text-[#6B5B45] font-medium">New books are coming soon! Stay tuned to the Lekhyas Universe.</p>
+        </div>
+      )}
+
+      {adBanner && (
+        <div className="w-full bg-black py-8 border-y-8 border-[#1A1A1A] flex justify-center relative overflow-hidden" style={{ backgroundImage: "repeating-linear-gradient(45deg, #0a0a0a, #0a0a0a 10px, #000 10px, #000 20px)" }}>
+          <div className="max-w-5xl px-4 w-full text-center relative z-10 flex flex-col items-center">
+            <div className="mb-4">
+              <span className="text-[#F5C518] text-xs md:text-sm tracking-[0.2em] uppercase bg-black px-4 py-1.5 border-2 border-[#F5C518]" style={{ fontFamily: "Bangers, cursive", boxShadow: "3px 3px 0 #C8181E" }}>SPONSORED TRANSMISSION</span>
+            </div>
+            {adBanner.linkUrl ? (
+              <a href={adBanner.linkUrl} target="_blank" rel="noopener noreferrer" className="block cursor-pointer hover:scale-[1.01] transition-transform duration-300 w-full">
+                <img src={adBanner.imageUrl} alt="Advertisement" className="w-full h-[120px] md:h-[200px] object-cover mx-auto border-4 border-black" style={{ boxShadow: "6px 6px 0 #F5C518" }} />
+              </a>
+            ) : (
+              <div className="w-full">
+                <img src={adBanner.imageUrl} alt="Advertisement" className="w-full h-[120px] md:h-[200px] object-cover mx-auto border-4 border-black" style={{ boxShadow: "6px 6px 0 #F5C518" }} />
+              </div>
+            )}
+          </div>
         </div>
       )}
 

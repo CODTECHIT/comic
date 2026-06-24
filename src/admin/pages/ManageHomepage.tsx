@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Plus, Trash2, Image as ImageIcon, LayoutTemplate } from "lucide-react";
+import { Plus, Trash2, Image as ImageIcon, LayoutTemplate, Save } from "lucide-react";
 import { ImageUploadZone } from "../components/ImageUploadZone";
 import { API_URL } from "../../config/api";
 import { fetchApi } from "../../lib/apiClient";
@@ -17,6 +17,12 @@ export function ManageHomepage() {
   const [accentColor, setAccentColor] = useState("#C8181E");
   const [img, setImg] = useState("");
 
+  // Ad Banner State
+  const [adBanner, setAdBanner] = useState<any>(null);
+  const [adImg, setAdImg] = useState("");
+  const [adLink, setAdLink] = useState("");
+  const [adActive, setAdActive] = useState(true);
+
   const fetchSlides = async () => {
     try {
       const res = await fetchApi(`${API_URL}/heroslides`);
@@ -29,8 +35,24 @@ export function ManageHomepage() {
     }
   };
 
+  const fetchAdBanner = async () => {
+    try {
+      const res = await fetchApi(`${API_URL}/adbanner`);
+      const data = await res.json();
+      if (data) {
+        setAdBanner(data);
+        setAdImg(data.imageUrl || "");
+        setAdLink(data.linkUrl || "");
+        setAdActive(data.isActive !== undefined ? data.isActive : true);
+      }
+    } catch (err) {
+      console.error("Failed to fetch ad banner", err);
+    }
+  };
+
   useEffect(() => {
     fetchSlides();
+    fetchAdBanner();
   }, []);
 
   const handleAdd = async (e: React.FormEvent) => {
@@ -71,6 +93,30 @@ export function ManageHomepage() {
       fetchSlides();
     } catch (err) {
       console.error("Failed to delete slide", err);
+    }
+  };
+
+  const handleSaveAdBanner = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!adImg) return alert("Please upload an image for the ad banner.");
+    try {
+      const res = await fetchApi(`${API_URL}/adbanner`, {
+        method: "PUT",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("adminToken")}`
+        },
+        body: JSON.stringify({ imageUrl: adImg, linkUrl: adLink, isActive: adActive }),
+      });
+      if (res.ok) {
+        alert("Ad Banner saved successfully.");
+        fetchAdBanner();
+      } else {
+        const errorData = await res.json();
+        alert(`Error: ${errorData.error}`);
+      }
+    } catch (err) {
+      console.error("Failed to save ad banner", err);
     }
   };
 
@@ -163,6 +209,37 @@ export function ManageHomepage() {
             </div>
           )}
         </div>
+      </div>
+
+      <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-sm mt-8">
+        <h2 className="text-lg font-semibold text-slate-800 mb-4 border-b pb-2">Gallery Ad Banner</h2>
+        <p className="text-sm text-slate-500 mb-6">This banner is displayed above "THE LEKHYAS UNIVERSE GALLERY" on the homepage.</p>
+        <form onSubmit={handleSaveAdBanner} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <ImageUploadZone 
+                label="Ad Banner Image *"
+                description="Upload wide banner image"
+                value={adImg}
+                onChange={(val) => setAdImg(val as string)}
+                aspectRatio="3/1"
+              />
+            </div>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-slate-700 mb-1">Redirect URL (Optional)</label>
+                <input type="text" value={adLink} onChange={e => setAdLink(e.target.value)} className="w-full border rounded-md px-3 py-2 text-sm" placeholder="e.g. https://example.com" />
+              </div>
+              <div className="flex items-center gap-2">
+                <input type="checkbox" id="adActive" checked={adActive} onChange={e => setAdActive(e.target.checked)} className="rounded border-slate-300 text-[#C8181E] focus:ring-[#C8181E]" />
+                <label htmlFor="adActive" className="text-sm font-medium text-slate-700">Banner is Active</label>
+              </div>
+              <button type="submit" className="w-full bg-[#1e293b] text-white py-2.5 rounded-md font-medium text-sm flex items-center justify-center gap-2 hover:bg-slate-800 transition-colors mt-4">
+                <Save size={16} /> Save Ad Banner
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   );

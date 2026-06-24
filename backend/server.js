@@ -14,6 +14,7 @@ import categoryRoutes from "./src/routes/categoryRoutes.js";
 import subscriptionRoutes from "./src/routes/subscriptionRoutes.js";
 import orderRoutes from "./src/routes/orderRoutes.js";
 import heroSlideRoutes from "./src/routes/heroSlideRoutes.js";
+import adBannerRoutes from "./src/routes/adBannerRoutes.js";
 import commentRoutes from "./src/routes/commentRoutes.js";
 import testEmailRoute from "./src/routes/testEmailRoute.js";
 import { notFound, errorHandler } from "./src/middleware/errorMiddleware.js";
@@ -106,6 +107,7 @@ app.use("/api/v1/categories",    categoryRoutes);
 app.use("/api/v1/subscriptions", subscriptionRoutes);
 app.use("/api/v1/orders",        orderRoutes);
 app.use("/api/v1/heroslides",    heroSlideRoutes);
+app.use("/api/v1/adbanner",      adBannerRoutes);
 app.use("/api/v1/comments",      commentRoutes);
 app.use("/api/v1/emails",        testEmailRoute);
 

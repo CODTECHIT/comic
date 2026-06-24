@@ -8,9 +8,10 @@ interface ImageUploadZoneProps {
   multiple?: boolean;
   value: string | string[];
   onChange: (url: string | string[]) => void;
+  aspectRatio?: string;
 }
 
-export function ImageUploadZone({ label, description, multiple = false, value, onChange }: ImageUploadZoneProps) {
+export function ImageUploadZone({ label, description, multiple = false, value, onChange, aspectRatio = "2/3" }: ImageUploadZoneProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
@@ -22,6 +23,9 @@ export function ImageUploadZone({ label, description, multiple = false, value, o
     
     const response = await fetch(`${API_URL}/upload`, {
       method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem("adminToken")}`
+      },
       body: formData,
     });
     
@@ -59,7 +63,7 @@ export function ImageUploadZone({ label, description, multiple = false, value, o
       <label className="block text-sm font-medium text-slate-700">{label}</label>
       
       {!multiple && value && typeof value === 'string' ? (
-        <div className="relative border border-slate-200 rounded-lg overflow-hidden group" style={{ aspectRatio: '2/3' }}>
+        <div className="relative border border-slate-200 rounded-lg overflow-hidden group" style={{ aspectRatio }}>
           <img src={value} alt="Preview" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
             <button type="button" onClick={() => onChange("")} className="bg-white text-red-600 p-2 rounded-full hover:bg-red-50">
@@ -71,7 +75,8 @@ export function ImageUploadZone({ label, description, multiple = false, value, o
         <div 
           className={`border-2 border-dashed rounded-lg p-6 flex flex-col items-center justify-center text-center transition-colors cursor-pointer ${
             isDragging ? "border-red-500 bg-red-50" : "border-slate-300 hover:bg-slate-50"
-          } ${!multiple ? "aspect-[2/3]" : "min-h-[200px]"}`}
+          } ${multiple ? "min-h-[200px]" : ""}`}
+          style={!multiple ? { aspectRatio } : undefined}
           onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
           onDragLeave={() => setIsDragging(false)}
           onDrop={(e) => { e.preventDefault(); setIsDragging(false); handleFiles(e.dataTransfer.files); }}

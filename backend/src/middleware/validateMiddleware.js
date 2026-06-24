@@ -151,6 +151,14 @@ export const heroSlideSchema = z.object({
   }),
 });
 
+export const adBannerSchema = z.object({
+  body: z.object({
+    imageUrl: z.string().url("Invalid image URL"),
+    linkUrl: z.string().url("Invalid link URL").or(z.literal("")).optional(),
+    isActive: z.boolean().optional(),
+  }),
+});
+
 // ── Contact schema ────────────────────────────────────────────────────────────
 export const contactFormSchema = z.object({
   body: z.object({

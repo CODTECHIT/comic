@@ -44,7 +44,7 @@ export function HeroSection() {
       <div className="text-[#F5C518] mb-4">
         <span style={{ fontFamily: "Bangers, cursive", fontSize: "40px", letterSpacing: "0.05em" }}>LOADING UNIVERSE...</span>
       </div>
-      <p className="text-white/50 text-sm">Waiting for hero slides to be configured in Admin Panel.</p>
+      <p className="text-white/50 text-sm">Waiting for hero slides to be configured.</p>
     </div>
   );
 
