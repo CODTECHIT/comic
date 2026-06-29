@@ -221,7 +221,6 @@ export function ComicDetailPage() {
           <div className="lg:col-span-3">
             <div className="flex flex-wrap gap-2 mb-4">
               <Badge text={comic.genre} variant="blue" />
-              <Badge text={`${comic.issues} Issues`} variant="yellow" />
               <Badge text="All Ages" variant="yellow" />
             </div>
             <h1 style={{ fontFamily: "Bangers, cursive", fontSize: "clamp(40px, 5vw, 60px)", letterSpacing: "0.04em", lineHeight: 1.1 }}>
