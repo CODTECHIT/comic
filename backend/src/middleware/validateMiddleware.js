@@ -168,7 +168,7 @@ export const contactFormSchema = z.object({
   body: z.object({
     name: z.string().min(1, "Name is required").max(100, "Name too long"),
     email: z.string().email("Invalid email").max(100, "Email too long"),
-    subject: z.string().min(1, "Subject is required").max(200, "Subject too long"),
+    phone: z.string().max(20, "Phone number too long").optional(),
     message: z.string().min(10, "Message must be at least 10 characters").max(5000, "Message too long"),
   }),
 });

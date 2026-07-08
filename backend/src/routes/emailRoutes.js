@@ -1,3 +1,4 @@
+/* eslint-env node */
 import express from "express";
 import axios from "axios";
 import dotenv from "dotenv";
@@ -16,8 +17,9 @@ const contactLimiter = rateLimit({
   max: 3, // 3 requests
   message: { message: "Too many contact requests from this IP, please try again after 30 minutes." }
 });
+import { emailLimiter } from "../middleware/rateLimitMiddleware.js";
 
-router.post("/", validateRequest(sendEmailSchema), async (req, req_res) => {
+router.post("/", emailLimiter, validateRequest(sendEmailSchema), async (req, req_res) => {
   const { to, subject, html } = req.body;
 
   try {
@@ -43,13 +45,18 @@ router.post("/", validateRequest(sendEmailSchema), async (req, req_res) => {
   }
 });
 
+import Contact from "../models/Contact.js";
+
 router.post("/contact", contactLimiter, validateRequest(contactFormSchema), async (req, res) => {
-  const { name, email, subject, message } = req.body;
+  const { name, email, phone, message } = req.body;
   try {
-    sendContactFormEmail(name, email, subject, message);
+    const contact = new Contact({ name, email, phone, message });
+    await contact.save();
+
+    sendContactFormEmail(name, email, phone, message);
     res.json({ message: "Contact form submitted successfully" });
   } catch (error) {
-    res.status(500).json({ message: "Failed to process contact form" });
+    res.status(500).json({ message: "Failed to process contact form", error: error.message });
   }
 });
 

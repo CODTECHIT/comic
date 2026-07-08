@@ -1,5 +1,5 @@
 import { Outlet, Navigate, NavLink } from "react-router";
-import { LogOut, LayoutDashboard, BookOpen, ListOrdered, Crown, ShoppingCart, Settings, Image, MessageSquare } from "lucide-react";
+import { LogOut, LayoutDashboard, BookOpen, ListOrdered, Crown, ShoppingCart, Settings, Image, MessageSquare, Mail } from "lucide-react";
 import { useState, useEffect } from "react";
 import { API_URL } from "../../config/api";
 
@@ -51,6 +51,7 @@ export function AdminLayout() {
           <NavItem to="/admin/comic/subscriptions" icon={<Crown size={20} />} label="Subscriptions" />
           <NavItem to="/admin/comic/orders" icon={<ShoppingCart size={20} />} label="Orders & Sales" />
           <NavItem to="/admin/comic/comments" icon={<MessageSquare size={20} />} label="Comments" />
+          <NavItem to="/admin/comic/contacts" icon={<Mail size={20} />} label="Contacts & Inquiries" />
           <NavItem to="/admin/comic/homepage" icon={<Image size={20} />} label="Homepage Hero" />
         </nav>
       </aside>

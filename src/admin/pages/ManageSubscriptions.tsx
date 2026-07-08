@@ -27,7 +27,7 @@ export function ManageSubscriptions() {
     setEditForm({
       price: sub.price,
       description: sub.description || "",
-      features: sub.features ? sub.features.join(", ") : "",
+      features: sub.features ? sub.features.join("\n") : "",
       is_active: sub.is_active,
       is_popular: sub.is_popular,
       display_order: sub.display_order,
@@ -42,7 +42,7 @@ export function ManageSubscriptions() {
   const handleSave = async (id: string) => {
     setIsSubmitting(true);
     try {
-      const featuresArray = editForm.features.split(",").map((f: string) => f.trim()).filter((f: string) => f);
+      const featuresArray = editForm.features.split("\n").map((f: string) => f.trim()).filter((f: string) => f);
       const res = await fetchApi(`${API_URL}/subscriptions/${id}`, {
         method: "PUT",
         headers: { 
@@ -110,8 +110,8 @@ export function ManageSubscriptions() {
                         <input type="number" value={editForm.display_order} onChange={e => setEditForm({...editForm, display_order: e.target.value})} className="border p-2 rounded w-full" />
                       </div>
                       <div className="md:col-span-2">
-                        <label className="block text-sm font-bold mb-1">Features (comma separated)</label>
-                        <input value={editForm.features} onChange={e => setEditForm({...editForm, features: e.target.value})} className="border p-2 rounded w-full" />
+                        <label className="block text-sm font-bold mb-1">Features (one per line)</label>
+                        <textarea rows={4} value={editForm.features} onChange={e => setEditForm({...editForm, features: e.target.value})} className="border p-2 rounded w-full font-mono text-sm" />
                       </div>
                       <div className="flex items-center gap-6 mt-2">
                         <label className="flex items-center gap-2 cursor-pointer">

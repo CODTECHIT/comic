@@ -10,6 +10,7 @@ import { ManageSubscriptions } from "./admin/pages/ManageSubscriptions";
 import { ManageOrders } from "./admin/pages/ManageOrders";
 import { ManageHomepage } from "./admin/pages/ManageHomepage";
 import { ManageComments } from "./admin/pages/ManageComments";
+import { ManageContacts } from "./admin/pages/ManageContacts";
 
 export function AppRoutes() {
   return (
@@ -30,6 +31,7 @@ export function AppRoutes() {
           <Route path="subscriptions" element={<ManageSubscriptions />} />
           <Route path="orders" element={<ManageOrders />} />
           <Route path="comments" element={<ManageComments />} />
+          <Route path="contacts" element={<ManageContacts />} />
           <Route path="homepage" element={<ManageHomepage />} />
         </Route>
       </Routes>

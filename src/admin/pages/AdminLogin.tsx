@@ -1,17 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { Lock } from "lucide-react";
+
 import { API_URL } from "../../config/api";
 
-export function AdminLogin({ setAdminAuth }: any) {
+export function AdminLogin() {
   const navigate = useNavigate();
 
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    const email = formData.get("email");
-    const password = formData.get("password");
+    const email = (formData.get("email") as string)?.trim();
+    const password = (formData.get("password") as string)?.trim();
+
+    setIsLoading(true);
+    setError("");
 
     try {
       const response = await fetch(`${API_URL}/admin/login`, {
@@ -28,10 +33,12 @@ export function AdminLogin({ setAdminAuth }: any) {
         navigate("/admin/comic/dashboard");
       } else {
         const data = await response.json();
-        setError(data.message || "Login failed");
+        setError(data.error || data.message || "Login failed");
       }
-    } catch (err) {
-      setError("Server error. Please try again.");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Server error. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -92,9 +99,10 @@ export function AdminLogin({ setAdminAuth }: any) {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md border border-transparent bg-[#C8181E] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors"
+                disabled={isLoading}
+                className="flex w-full justify-center rounded-md border border-transparent bg-[#C8181E] py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors disabled:opacity-50"
               >
-                Sign in
+                {isLoading ? "Signing in..." : "Sign in"}
               </button>
             </div>
           </form>

@@ -109,7 +109,7 @@ export const sendMembershipPurchaseEmail = async (email, planName, startDate, ex
   await sendHtmlEmail(email, subject, html, "Membership Purchase Confirmation");
 };
 
-export const sendContactFormEmail = async (name, userEmail, subject, message) => {
+export const sendContactFormEmail = async (name, userEmail, phone, message) => {
   const adminEmail = process.env.ADMIN_CONTACT_EMAIL;
   if (!adminEmail) {
     console.error("[Email Service] ADMIN_CONTACT_EMAIL is not configured.");
@@ -121,13 +121,13 @@ export const sendContactFormEmail = async (name, userEmail, subject, message) =>
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${userEmail}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
+        <p><strong>Phone:</strong> ${phone || "N/A"}</p>
         <hr>
         <p><strong>Message:</strong></p>
         <p style="white-space: pre-wrap;">${message}</p>
       </div>
     `;
-    await sendHtmlEmail(adminEmail, `New Contact Inquiry: ${subject}`, adminHtml, "Contact Form (To Admin)");
+    await sendHtmlEmail(adminEmail, `New Contact Inquiry from ${name}`, adminHtml, "Contact Form (To Admin)");
   }
 
   // Send Acknowledgment to User

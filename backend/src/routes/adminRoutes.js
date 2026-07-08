@@ -53,14 +53,17 @@ router.post("/login", async (req, res) => {
 // @route GET /api/v1/admin/me
 // @access Private/Admin
 router.get("/me", (req, res) => {
-  const token = req.cookies?.jwt || (req.headers?.authorization?.startsWith("Bearer ") ? req.headers.authorization.split(" ")[1] : null);
+  const bearerToken = req.headers?.authorization?.startsWith("Bearer ") ? req.headers.authorization.split(" ")[1] : null;
+  const token = bearerToken || req.cookies?.jwt;
+  
   if (!token) return res.status(401).json({ message: "Not authenticated" });
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (decoded.role !== "admin") return res.status(403).json({ message: "Not admin" });
     res.json({ authenticated: true, role: decoded.role });
-  } catch {
-    res.status(401).json({ message: "Token invalid or expired" });
+  } catch (error) {
+    console.error("JWT Verify Error in /me:", error.message);
+    res.status(401).json({ message: "Token invalid or expired", error: error.message });
   }
 });
 
@@ -94,6 +97,41 @@ router.get("/stats", protectAdmin, async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch stats", error: error.message });
+  }
+});
+
+import Contact from "../models/Contact.js";
+
+// @desc  Get all contact form submissions
+// @route GET /api/v1/admin/contacts
+// @access Private/Admin
+router.get("/contacts", protectAdmin, async (req, res) => {
+  try {
+    const contacts = await Contact.find().sort({ createdAt: -1 });
+    res.json(contacts);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch contacts", error: error.message });
+  }
+});
+
+// @desc  Update contact submission status
+// @route PATCH /api/v1/admin/contacts/:id/status
+// @access Private/Admin
+router.patch("/contacts/:id/status", protectAdmin, async (req, res) => {
+  try {
+    const { status } = req.body;
+    const contact = await Contact.findById(req.params.id);
+    
+    if (!contact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+
+    contact.status = status;
+    const updatedContact = await contact.save();
+
+    res.json(updatedContact);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update contact status", error: error.message });
   }
 });
 

@@ -18,3 +18,14 @@
     at file:///C:/Users/MAHAJAN%20ASHOK/OneDrive/Desktop/comic%20book/comic-1/backend/node_modules/express-rate-limit/dist/index.mjs:779:7
     at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
     at async file:///C:/Users/MAHAJAN%20ASHOK/OneDrive/Desktop/comic%20book/comic-1/backend/node_modules/express-rate-limit/dist/index.mjs:663:5
+[ERROR] 2026-07-08T11:19:40.680Z - 404 - Not Found - /api/v1/emails/contact - /api/v1/emails/contact - POST - ::1 Error: Not Found - /api/v1/emails/contact
+    at notFound (file:///C:/Users/MAHAJAN%20ASHOK/OneDrive/Desktop/comic%20book/comic-1/backend/src/middleware/errorMiddleware.js:4:17)
+    at Layer.handle [as handle_request] (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:286:9
+    at router.process_params (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:646:15
+    at next (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:265:14)
+    at router.handle (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\MAHAJAN ASHOK\OneDrive\Desktop\comic book\comic-1\backend\node_modules\express\lib\router\index.js:47:12)

@@ -1,3 +1,4 @@
+/* eslint-env node */
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -85,7 +86,6 @@ app.use("/api/v1/admin/login",          authLimiter);
 
 // Email / OTP requests — 3 / 15 min
 app.use("/api/v1/users/forgot-password", emailLimiter);
-app.use("/api/v1/send-email",            emailLimiter);
 
 // Uploads — 10 / 15 min
 app.use("/api/v1/upload", uploadLimiter);

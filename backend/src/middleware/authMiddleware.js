@@ -2,13 +2,13 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 const extractToken = (req) => {
-  // Check cookie first
-  if (req.cookies?.jwt) return req.cookies.jwt;
-  // Fall back to Bearer Authorization header
+  // Check Bearer Authorization header first
   const authHeader = req.headers?.authorization;
   if (authHeader && authHeader.startsWith("Bearer ")) {
     return authHeader.split(" ")[1];
   }
+  // Fall back to cookie
+  if (req.cookies?.jwt) return req.cookies.jwt;
   return null;
 };
 
